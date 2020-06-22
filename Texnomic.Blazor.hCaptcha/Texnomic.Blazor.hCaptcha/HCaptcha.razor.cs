@@ -1,15 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
+
+using Texnomic.Blazor.hCaptcha.Configurations;
+using Texnomic.Blazor.hCaptcha.Enums;
 
 namespace Texnomic.Blazor.hCaptcha
 {
     public class HCaptchaBase : ComponentBase, IDisposable
     {
         [Inject] protected IJSRuntime JsRuntime { get; set; }
-        
+
+        [Inject] protected IHttpClientFactory HttpClientFactory { get; set; }
+
+        [Inject] protected IOptionsMonitor<HCaptchaConfiguration> Configuration { get; set; }
+
+        [Parameter] public bool IsValid { get; set; }
+        [Parameter] public Theme Theme { get; set; }
+        [Parameter] public Size Size { get; set; }
+
         private DotNetObjectReference<HCaptchaBase> Instance { get; set; }
+
+        protected string ID { get; set; }
+
+        public HCaptchaBase()
+        {
+            ID = Guid.NewGuid().ToString();
+        }
 
         protected override async Task OnAfterRenderAsync(bool FirstRender)
         {
@@ -17,20 +39,32 @@ namespace Texnomic.Blazor.hCaptcha
             {
                 Instance = DotNetObjectReference.Create(this);
 
-                await JsRuntime.InvokeVoidAsync("JsFunctions.hCaptcha", Instance);
+                await JsRuntime.InvokeVoidAsync("JsFunctions.hCaptcha", ID, Instance, Configuration.CurrentValue.SiteKey, Theme, Size);
             }
         }
 
         [JSInvokable("HCaptchaOnSuccess")]
         public async Task OnSuccess(string Token)
         {
-            
+            var HttpClient = HttpClientFactory.CreateClient("hCapatcha");
+
+            var Content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("response", Token),
+                    new KeyValuePair<string, string>("secret", Configuration.CurrentValue.Secret),
+                });
+
+            var Result = await HttpClient.PostAsync("https://hcaptcha.com/siteverify", Content);
+
+            IsValid = Result.IsSuccessStatusCode;
         }
 
         [JSInvokable("HCaptchaOnError")]
         public async Task OnError()
         {
+            IsValid = false;
 
+            await Task.Yield();
         }
 
         private bool IsDisposed;
@@ -38,6 +72,7 @@ namespace Texnomic.Blazor.hCaptcha
         public void Dispose()
         {
             Dispose(true);
+
             GC.SuppressFinalize(this);
         }
 

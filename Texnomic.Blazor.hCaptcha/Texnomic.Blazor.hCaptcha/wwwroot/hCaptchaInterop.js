@@ -1,9 +1,13 @@
 window.JsFunctions =
 {
-    hCaptcha: function(DotNetInstance) {
-        hcaptcha.render('hcaptcha',
+    hCaptcha: function(DotNetInstance, ID, SiteKey, Theme, Size) {
+        hcaptcha.render(ID,
             {
-                'sitekey': 'd355811d-9cf2-4348-8bb6-7bb66f41f44e',
+                'sitekey': SiteKey,
+
+                'theme': Theme,
+
+                'Size': Size,
 
                 'callback': function(Args) {
                     DotNetInstance.invokeMethodAsync('HCaptchaOnSuccess', Args);
