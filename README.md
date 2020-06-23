@@ -1,4 +1,4 @@
-![Blazor](https://raw.githubusercontent.com/Texnomic/hCaptcha/master/Blazor.png)
+![Blazor](https://raw.githubusercontent.com/Texnomic/hCaptcha/master/Logo.png)
 ## Texnomic.Blazor.hCaptcha
 
 ![NuGet](https://img.shields.io/nuget/vpre/Texnomic.Blazor.hCaptcha?logo=NuGet&label=NuGet%20%7C%20Texnomic.Blazor.hCaptcha&logoColor=blue&color=blue)
