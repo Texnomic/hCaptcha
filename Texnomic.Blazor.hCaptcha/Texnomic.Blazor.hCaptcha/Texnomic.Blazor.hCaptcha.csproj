@@ -3,6 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <Version>0.1.0</Version>
+    <Authors>Texnomic</Authors>
+    <Company>Texnomic Ltd</Company>
+    <Description>hCaptcha Blazor Component</Description>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Texnomic/hCaptcha</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Texnomic/hCaptcha</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Captcha hCaptcha Blazor</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
