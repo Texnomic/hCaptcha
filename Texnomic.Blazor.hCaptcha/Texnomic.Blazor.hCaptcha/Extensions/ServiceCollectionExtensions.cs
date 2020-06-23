@@ -8,7 +8,7 @@ namespace Texnomic.Blazor.hCaptcha.Extensions
     {
         public static IServiceCollection AddHCaptcha(this IServiceCollection Services, Action<HCaptchaConfiguration> Configuration)
         {
-            Services.Configure<HCaptchaConfiguration>("hCaptcha", Configuration);
+            Services.Configure<HCaptchaConfiguration>(Configuration);
 
             return Services;
         }

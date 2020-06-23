@@ -20,7 +20,7 @@ namespace Texnomic.Blazor.hCaptcha
 
         [Inject] protected IOptionsMonitor<HCaptchaConfiguration> Configuration { get; set; }
 
-        [Parameter] public bool IsValid { get; set; }
+        [Parameter] public EventCallback<bool> Callback { get; set; }
         [Parameter] public Theme Theme { get; set; }
         [Parameter] public Size Size { get; set; }
 
@@ -30,7 +30,7 @@ namespace Texnomic.Blazor.hCaptcha
 
         public HCaptchaBase()
         {
-            ID = Guid.NewGuid().ToString();
+            ID = Guid.NewGuid().ToString().Replace("-", "");
         }
 
         protected override async Task OnAfterRenderAsync(bool FirstRender)
@@ -39,7 +39,7 @@ namespace Texnomic.Blazor.hCaptcha
             {
                 Instance = DotNetObjectReference.Create(this);
 
-                await JsRuntime.InvokeVoidAsync("JsFunctions.hCaptcha", ID, Instance, Configuration.CurrentValue.SiteKey, Theme, Size);
+                await JsRuntime.InvokeVoidAsync("Texnomic.Blazor.hCaptcha", Instance, ID, Configuration.CurrentValue.SiteKey, Theme, Size);
             }
         }
 
@@ -56,15 +56,13 @@ namespace Texnomic.Blazor.hCaptcha
 
             var Result = await HttpClient.PostAsync("https://hcaptcha.com/siteverify", Content);
 
-            IsValid = Result.IsSuccessStatusCode;
+            await Callback.InvokeAsync(Result.IsSuccessStatusCode);
         }
 
         [JSInvokable("HCaptchaOnError")]
         public async Task OnError()
         {
-            IsValid = false;
-
-            await Task.Yield();
+            await Callback.InvokeAsync(false);
         }
 
         private bool IsDisposed;

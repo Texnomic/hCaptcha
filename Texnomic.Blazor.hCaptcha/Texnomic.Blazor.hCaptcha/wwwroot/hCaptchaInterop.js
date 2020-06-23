@@ -1,21 +1,24 @@
-window.JsFunctions =
+window.Texnomic =
 {
-    hCaptcha: function(DotNetInstance, ID, SiteKey, Theme, Size) {
-        hcaptcha.render(ID,
-            {
-                'sitekey': SiteKey,
+    Blazor:
+    {
+        hCaptcha: function (DotNetInstance, ID, SiteKey, Theme, Size) {
+            hcaptcha.render(ID,
+                {
+                    'sitekey': SiteKey,
 
-                'theme': Theme,
+                    'theme': Theme,
 
-                'Size': Size,
+                    'Size': Size,
 
-                'callback': function(Args) {
-                    DotNetInstance.invokeMethodAsync('HCaptchaOnSuccess', Args);
-                },
+                    'callback': function (Args) {
+                        DotNetInstance.invokeMethodAsync('HCaptchaOnSuccess', Args);
+                    },
 
-                'error-callback': function(Args) {
-                    DotNetInstance.invokeMethodAsync('HCaptchaOnError', Args);
-                }
-            });
+                    'error-callback': function (Args) {
+                        DotNetInstance.invokeMethodAsync('HCaptchaOnError', Args);
+                    }
+                });
+        }
     }
 }
