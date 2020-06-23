@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Texnomic.Blazor.hCaptcha.Configurations
+﻿namespace Texnomic.Blazor.hCaptcha.Configurations
 {
     public class HCaptchaConfiguration
     {

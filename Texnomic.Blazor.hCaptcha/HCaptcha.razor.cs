@@ -39,7 +39,7 @@ namespace Texnomic.Blazor.hCaptcha
             {
                 Instance = DotNetObjectReference.Create(this);
 
-                await JsRuntime.InvokeVoidAsync("Texnomic.Blazor.hCaptcha", Instance, ID, Configuration.CurrentValue.SiteKey, Theme, Size);
+                await JsRuntime.InvokeVoidAsync("Texnomic.Blazor.hCaptcha", Instance, ID, Configuration.CurrentValue.SiteKey, Theme.ToString().ToLower(), Size.ToString().ToLower());
             }
         }
 
