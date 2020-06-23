@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Texnomic</Authors>
     <Company>Texnomic Ltd</Company>
-    <Description>hCaptcha Blazor Component</Description>
+    <Description>ASP.NET Core hCaptcha Component for Server-Side Blazor.</Description>
     <Copyright>Copyright 2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Texnomic/hCaptcha</PackageProjectUrl>
@@ -14,6 +14,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Captcha hCaptcha Blazor</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>Blazor.png</PackageIcon>
   </PropertyGroup>
 
 
@@ -23,6 +24,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\Blazor.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
