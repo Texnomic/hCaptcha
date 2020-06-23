@@ -14,7 +14,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Captcha hCaptcha Blazor</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>Blazor.png</PackageIcon>
+    <PackageIcon>Logo.png</PackageIcon>
   </PropertyGroup>
 
 
@@ -28,7 +28,7 @@
 
 
   <ItemGroup>
-    <None Include="..\Blazor.png">
+    <None Include="..\Logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
