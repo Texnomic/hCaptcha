@@ -12,7 +12,7 @@ using Texnomic.Blazor.hCaptcha.Enums;
 
 namespace Texnomic.Blazor.hCaptcha
 {
-    public class HCaptchaBase : ComponentBase, IDisposable
+    public partial class HCaptcha : IDisposable
     {
         [Inject] protected IJSRuntime JsRuntime { get; set; }
 
@@ -24,11 +24,11 @@ namespace Texnomic.Blazor.hCaptcha
         [Parameter] public Theme Theme { get; set; }
         [Parameter] public Size Size { get; set; }
 
-        private DotNetObjectReference<HCaptchaBase> Instance { get; set; }
+        private DotNetObjectReference<HCaptcha> Instance { get; set; }
 
         protected string ID { get; set; }
 
-        public HCaptchaBase()
+        public HCaptcha()
         {
             ID = Guid.NewGuid().ToString().Replace("-", "");
         }
@@ -65,30 +65,9 @@ namespace Texnomic.Blazor.hCaptcha
             await Callback.InvokeAsync(false);
         }
 
-        private bool IsDisposed;
-
         public void Dispose()
         {
-            Dispose(true);
-
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (IsDisposed) return;
-
-            if (Disposing)
-            {
-                Instance?.Dispose();
-            }
-
-            IsDisposed = true;
-        }
-
-        ~HCaptchaBase()
-        {
-            Dispose(false);
+            Instance?.Dispose();
         }
     }
 }
