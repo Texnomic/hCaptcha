@@ -3,6 +3,8 @@ window.Texnomic =
     Blazor:
     {
         hCaptcha: function (DotNetInstance, ID, SiteKey, Theme, Size) {
+            if (typeof hcaptcha == 'undefined')
+                return false;
             hcaptcha.render(ID,
                 {
                     'sitekey': SiteKey,
@@ -19,6 +21,7 @@ window.Texnomic =
                         DotNetInstance.invokeMethodAsync('HCaptchaOnError', Args);
                     }
                 });
+            return true;
         }
     }
 }
