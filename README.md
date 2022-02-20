@@ -33,6 +33,7 @@ PM> Install-Package Texnomic.Blazor.hCaptcha
 
     public void ConfigureServices(IServiceCollection Services)
     {
+        Services.AddHttpClient();
         Services.AddHCaptcha(Options =>
         {
             Options.SiteKey = "10000000-ffff-ffff-ffff-000000000001";
